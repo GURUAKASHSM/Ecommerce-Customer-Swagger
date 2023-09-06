@@ -1,0 +1,233 @@
+basePath: /api/v1
+definitions:
+  main.Address:
+    properties:
+      city:
+        type: string
+      country:
+        type: string
+      state:
+        type: string
+      street1:
+        type: string
+      street2:
+        type: string
+      zip:
+        type: string
+    type: object
+  main.Customer:
+    properties:
+      address:
+        items:
+          $ref: '#/definitions/main.Address'
+        type: array
+      customerid:
+        type: string
+      email:
+        type: string
+      firstname:
+        type: string
+      hashesandsaltedpassword:
+        type: string
+      lastname:
+        type: string
+      shippingaddress:
+        items:
+          $ref: '#/definitions/main.ShippingAddress'
+        type: array
+    type: object
+  main.DeleteRequest:
+    properties:
+      customerid:
+        type: string
+    type: object
+  main.DeleteResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  main.ShippingAddress:
+    properties:
+      city:
+        type: string
+      state:
+        type: string
+      street1:
+        type: string
+      street2:
+        type: string
+    type: object
+  main.Token:
+    properties:
+      token:
+        type: string
+    type: object
+  main.UpdatePassword:
+    properties:
+      email:
+        type: string
+      newpassword:
+        type: string
+      oldpassword:
+        type: string
+    type: object
+  main.UpdateRequest:
+    properties:
+      customerid:
+        type: string
+      field:
+        type: string
+      newvalue:
+        type: string
+      oldvalue:
+        type: string
+    type: object
+  main.UpdateResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  main.User:
+    properties:
+      customerid:
+        type: string
+      email:
+        type: string
+      hashedandsaltedpassword:
+        type: string
+    type: object
+host: localhost:8081
+info:
+  contact:
+    email: guuakashsm@gmail.com
+    name: Guru Akash
+    url: https://github.com/GURUAKASH-MUTHURAJAN
+  description: Sample description
+  title: Documenting API (Your API Title)
+  version: "1"
+paths:
+  /users/delete:
+    post:
+      consumes:
+      - application/json
+      description: Delete
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.DeleteRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.DeleteResponse'
+      summary: return Deleted Message
+      tags:
+      - Users
+  /users/getbyid:
+    get:
+      description: Update and return user
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.UpdatePassword'
+      security:
+      - bearerToken: []
+      summary: Update User
+      tags:
+      - Users
+  /users/reset:
+    post:
+      consumes:
+      - application/json
+      description: reset
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.UpdatePassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.UpdatePassword'
+      summary: return Updated Password
+      tags:
+      - Users
+  /users/signin:
+    post:
+      description: create and return user
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.User'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Token'
+      summary: return created user
+      tags:
+      - Users
+  /users/signup:
+    post:
+      consumes:
+      - application/json
+      description: signup
+      parameters:
+      - description: user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.Customer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Customer'
+      summary: return created user
+      tags:
+      - Users
+  /users/update:
+    post:
+      consumes:
+      - application/json
+      description: Update and return user
+      parameters:
+      - description: User
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.UpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.UpdateResponse'
+      summary: Update User
+      tags:
+      - Users
+securityDefinitions:
+  bearer:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

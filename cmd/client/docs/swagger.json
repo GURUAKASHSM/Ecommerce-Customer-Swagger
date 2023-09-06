@@ -1,0 +1,361 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Sample description",
+        "title": "Documenting API (Your API Title)",
+        "contact": {
+            "name": "Guru Akash",
+            "url": "https://github.com/GURUAKASH-MUTHURAJAN",
+            "email": "guuakashsm@gmail.com"
+        },
+        "version": "1"
+    },
+    "host": "localhost:8081",
+    "basePath": "/api/v1",
+    "paths": {
+        "/users/delete": {
+            "post": {
+                "description": "Delete",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "return Deleted Message",
+                "parameters": [
+                    {
+                        "description": "user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.DeleteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.DeleteResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/getbyid": {
+            "get": {
+                "security": [
+                    {
+                        "bearerToken": []
+                    }
+                ],
+                "description": "Update and return user",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update User",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.UpdatePassword"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/reset": {
+            "post": {
+                "description": "reset",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "return Updated Password",
+                "parameters": [
+                    {
+                        "description": "user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.UpdatePassword"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.UpdatePassword"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/signin": {
+            "post": {
+                "description": "create and return user",
+                "tags": [
+                    "Users"
+                ],
+                "summary": "return created user",
+                "parameters": [
+                    {
+                        "description": "User",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.User"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Token"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/signup": {
+            "post": {
+                "description": "signup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "return created user",
+                "parameters": [
+                    {
+                        "description": "user",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.Customer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.Customer"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/update": {
+            "post": {
+                "description": "Update and return user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update User",
+                "parameters": [
+                    {
+                        "description": "User",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/main.UpdateRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/main.UpdateResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "main.Address": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "street1": {
+                    "type": "string"
+                },
+                "street2": {
+                    "type": "string"
+                },
+                "zip": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.Customer": {
+            "type": "object",
+            "properties": {
+                "address": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.Address"
+                    }
+                },
+                "customerid": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "firstname": {
+                    "type": "string"
+                },
+                "hashesandsaltedpassword": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "shippingaddress": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/main.ShippingAddress"
+                    }
+                }
+            }
+        },
+        "main.DeleteRequest": {
+            "type": "object",
+            "properties": {
+                "customerid": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.DeleteResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.ShippingAddress": {
+            "type": "object",
+            "properties": {
+                "city": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "street1": {
+                    "type": "string"
+                },
+                "street2": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.Token": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.UpdatePassword": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "newpassword": {
+                    "type": "string"
+                },
+                "oldpassword": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.UpdateRequest": {
+            "type": "object",
+            "properties": {
+                "customerid": {
+                    "type": "string"
+                },
+                "field": {
+                    "type": "string"
+                },
+                "newvalue": {
+                    "type": "string"
+                },
+                "oldvalue": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.UpdateResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "main.User": {
+            "type": "object",
+            "properties": {
+                "customerid": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "hashedandsaltedpassword": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
+}
